@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Works - Claustrophobic</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    nav {
+      background-color: #111;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 1em;
+    }
+
+    .nav-links a:hover {
+      color: #00ffff;
+    }
+
+    .content {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+    <nav>
+        <div style="display: flex; align-items: center; font-weight: bold;">
+          <a href="index.html">
+            <img src="logo.png" alt="Logo" style="height: 30px; margin-right: 10px;" />
+          </a>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="works.html">Works</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+
+  <div class="content">
+    <h1>My Works</h1>
+    <div class="gallery">
+      <img src="works1.jpg" alt="Project 1" />
+      <img src="works2.jpg" alt="Project 2" />
+      <img src="works3.jpg" alt="Project 3" />
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>claustrophobic</title>
+  <style>
+
+    #overlay {
+      position: absolute;  /* Position it over the video */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);  /* Dark, transparent black */
+      z-index: -1;  /* Make sure the overlay is behind content but above the video */
+    }
+
+    #background-video {
+      position: fixed;  /* Keep the video fixed in place */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      background-image: url('works1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* Navbar styles */
+    nav {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: #00ffff;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    /* Main Content */
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: calc(100vh - 70px); /* full screen minus navbar height */
+      padding-top: 50px;
+    }
+
+    h1 {
+      font-size: 4em;
+      letter-spacing: 2px;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 1.4em;
+      max-width: 700px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* Testimonials Section */
+  #testimonials {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #000000;
+    color: #333;
+  }
+
+  #testimonials h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #ffffff;
+  }
+
+  /* Container for Testimonials */
+  .testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
+    gap: 30px; /* Space between testimonials */
+    justify-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Individual Testimonial Cards */
+  .testimonial-card {
+    background-color: #000;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .testimonial-text {
+    font-size: 1.2em;
+    font-style: italic;
+    color: #ffffff;
+    margin-bottom: 15px;
+  }
+
+  .client-name {
+    font-size: 1.1em;
+    color: #ffffff;
+  }
+
+  .testimonial-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+  }
+
+   /* Portfolio Highlights Section */
+#portfolio-highlights {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #000000;  /* Dark background */
+  color: #fff;  /* White text */
+}
+
+#portfolio-highlights h2 {
+  font-size: 2.8em;
+  margin-bottom: 40px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.highlight-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.highlight {
+  background-color: #333;  /* Darker card background */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  overflow: hidden; /* To hide any overflowed image */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.highlight p {
+  font-size: 1.2em;
+  margin-top: 15px;
+  color: #fff;
+}
+
+.view-more {
+  display: inline-block;
+  margin-top: 15px;
+  text-decoration: none;
+  color: #00ffff;
+  font-size: 1.1em;
+}
+
+.view-more:hover {
+  text-decoration: underline;
+}
+/* Services Section */
+#services {
+  padding: 80px 20px;
+  background-color: #111;  /* Dark background */
+  color: #fff;  /* White text */
+  text-align: center;
+}
+
+#services h2 {
+  font-size: 3em;
+  margin-bottom: 40px;
+  color: #fff;  /* White for the heading */
+  font-weight: bold;
+}
+
+.service-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;  /* Allow wrapping on smaller screens */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service {
+  background-color: #222;  /* Darker card background */
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service h3 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.service p {
+  font-size: 1.1em;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Hover effect for service cards */
+.service:hover {
+  transform: translateY(-10px);  /* Lift effect */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+  /* Newsletter Section */
+#newsletter {
+  padding: 60px 20px;
+  background-color: #111;  /* Dark background to match the website theme */
+  text-align: center;
+  color: #fff;
+}
+
+#newsletter h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: bold;
+}
+
+#newsletter form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#newsletter input {
+  padding: 12px;
+  width: 60%;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+#newsletter input:focus {
+  outline: none;
+  border: 2px solid #00ffff; /* Light cyan border on focus */
+}
+
+#newsletter button {
+  padding: 12px 20px;
+  font-size: 1.2em;
+  border: none;
+  background-color: #00ffff;
+  color: #111;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+#newsletter button:hover {
+  background-color: #00b3b3; /* Slightly darker cyan on hover */
+}
+
+
+  </style>
+</head>
+<body>
+    <video autoplay loop muted id="background-video">
+        <source src="background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div id="overlay"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="logo.png" alt="Logo" />
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="works.html">Works</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+      <h1>Claustrophobic</h1>
+      <p>Visual Jockey & Audiovisual Explorer. Welcome to my portfolio.</p>
+    </div>
+
+    <!-- Testimonials Section -->
+<section id="testimonials">
+    <h2>What People Say</h2>
+  
+    <!-- Testimonial Cards -->
+    <div class="testimonial-container">
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          "Claustrophobic's audiovisual work is stunning! It transformed our event into something unforgettable!"
+        </p>
+        <p class="client-name"><strong>Client Name</strong>, Event Organizer</p>
+      </div>
+  
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          "Incredible experience! Highly recommend for any audiovisual project."
+        </p>
+        <p class="client-name"><strong>Client Name</strong>, Music Artist</p>
+      </div>
+    </div>
+
+   <!-- Services Section -->
+<section id="services">
+    <h2>What I Do</h2>
+    <div class="service-container">
+      <div class="service">
+        <h3>Visual Design</h3>
+        <p>Creative visual solutions for live events, installations, and multimedia experiences.</p>
+      </div>
+      <div class="service">
+        <h3>Audio Design</h3>
+        <p>Crafting immersive soundscapes and custom audio setups for various projects.</p>
+      </div>
+      <div class="service">
+        <h3>Consultation</h3>
+        <p>Providing expert guidance for your audiovisual project, from concept to execution.</p>
+      </div>
+    </div>
+  </section>
+  
+  
+
+    <!-- Portfolio Highlights -->
+<section id="portfolio-highlights">
+    <h2>Featured Work</h2>
+    <div class="highlight-container">
+      <div class="highlight">
+        <img src="works1.jpg" alt="Work 1">
+        <p>Event Performance</p>
+        <a href="#works" class="view-more">View More</a>
+      </div>
+      <div class="highlight">
+        <img src="works2.jpg" alt="Work 2">
+        <p>Visual Installation</p>
+        <a href="#works" class="view-more">View More</a>
+      </div>
+    </div>
+  </section>
+  
+
+    <!-- Newsletter Section -->
+    <section id="newsletter">
+      <h2>Stay Updated</h2>
+      <form action="#" method="post">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+</body>
+</html>
